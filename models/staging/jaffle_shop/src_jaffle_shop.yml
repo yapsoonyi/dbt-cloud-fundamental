@@ -1,12 +1,27 @@
 version: 2
 
 sources:
-    - name: jaffle_shop # using this in ref function
+    - name: jaffle_shop # this is source name and use this in ref macro
+      description: a clone of a Postgres app db
       database: raw
       schema: jaffle_shop
       tables:
           - name: customers
+            description: the raw customers data
+            columns:
+              - name: id
+                description: primary key for the raw customers data
+                  - unique
+                  - not_null
+
           - name: orders
+            description: the raw orders data
+            columns:
+              - name: id
+                description: primary key for the raw orders data
+                tests:
+                  - unique
+                  - not_null
             # loaded_at_field: _etl_loaded_at # choose a timestamp column in the raw table
             # freshness:
             #   warn_after: {count: 12, period: hour}
